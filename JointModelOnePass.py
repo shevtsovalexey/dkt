@@ -96,8 +96,8 @@ class JDMOnePass(DisProgBuilder.DPMInterface):
         # print('--------------- b', b)
         idxInAllBiomk = self.biomkInFuncUnit[0][b]
         for s in range(len(self.unitModels[0].X[b])):
-          assert np.all(self.unitModels[0].X[b][s] == self.params['X'][idxInAllBiomk][s])
-          assert np.all(self.unitModels[0].Y[b][s] == self.params['Y'][idxInAllBiomk][s])
+          assert np.allclose(self.unitModels[0].X[b][s], self.params['X'][idxInAllBiomk][s])
+          assert np.allclose(self.unitModels[0].Y[b][s], self.params['Y'][idxInAllBiomk][s])
 
       # for u in range(self.nrFuncUnits):
       #   plotTrajParamsFuncUnit = JDMOnePass.createPlotTrajParamsFuncUnit(self.params, unitNr=u)

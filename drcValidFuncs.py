@@ -133,13 +133,13 @@ def addDRCValidData(validDf):
       # visDfCol(measureCol, colLabel, diagCol, diagNrs, diagLabels, diagColors, outFile)
 
       ctlIndx = np.where(diagCol == diagNrs[1])[0]
-      measCtl = measureCol[diagCol == diagNrs[1]].as_matrix().reshape(-1)
+      measCtl = measureCol[diagCol == diagNrs[1]].values.reshape(-1)
       minInd = np.argmin(measCtl)
       indxSorted = np.argsort(measCtl)
       # print(measCtl)
       # print('indxSorted', indxSorted)
       # print('ctlIndx[indxSorted]', ctlIndx[indxSorted])
-      sortedIdMS[r,:] = currGroup.loc[ctlIndx[indxSorted],'Scan1Study'].as_matrix()
+      sortedIdMS[r,:] = currGroup.loc[ctlIndx[indxSorted],'Scan1Study'].values
       # print('indxSorted', currGroup.loc[ctlIndx[indxSorted],'Scan1Study'])
       # print('minInd', currGroup.loc[ctlIndx[minInd],:])
       print('sortedIdMS',colLabel, sortedIdMS[r,:])
@@ -246,8 +246,8 @@ def visValidDf(validDf, outFilePrefix):
     fig.savefig(outFile)
     # print(adas)
 
-    ctlScanID = validDf.loc[np.logical_and(validDf.diag == 4, ~np.isnan(validDf[dtiCols[b]])), 'scanID'].as_matrix().reshape(-1)
-    patScanID = validDf.loc[np.logical_and(validDf.diag == 5, ~np.isnan(validDf[dtiCols[b]])), 'scanID'].as_matrix().reshape(-1)
+    ctlScanID = validDf.loc[np.logical_and(validDf.diag == 4, ~np.isnan(validDf[dtiCols[b]])), 'scanID'].values.reshape(-1)
+    patScanID = validDf.loc[np.logical_and(validDf.diag == 5, ~np.isnan(validDf[dtiCols[b]])), 'scanID'].values.reshape(-1)
     print('ctlScanID', ctlScanID)
     print('patScanID', patScanID)
     print('~np.isnan(validDf[dtiCols[b]])', np.sum(~np.isnan(validDf[dtiCols[b]])))
@@ -692,12 +692,15 @@ def validateDRCBiomk(dpmObj, params):
 
   #plot just the trajectories by modality groups
   for d in range(dpmObj.nrDis):
-    fig = dpmObj.plotter.plotTrajInDisSpaceOverlap(dpmObj, d, params, replaceFig=True)
-    figName = '%s/trajDisSpaceOverlap_%s_%s' % (params['outFolder'],
-      params['disLabels'][d], params['expName'])
-    fig.savefig('%s.png' % figName)
-    fig.savefig('%s.pdf' % figName)
-    print('Fig saved:%s.pdf ' % figName)
+    try:
+      fig = dpmObj.plotter.plotTrajInDisSpaceOverlap(dpmObj, d, params, replaceFig=True)
+      figName = '%s/trajDisSpaceOverlap_%s_%s' % (params['outFolder'],
+        params['disLabels'][d], params['expName'])
+      fig.savefig('%s.png' % figName)
+      fig.savefig('%s.pdf' % figName)
+      print('Fig saved:%s.pdf ' % figName)
+    except AttributeError:
+      pass
 
   plotFigs = False
   if plotFigs:

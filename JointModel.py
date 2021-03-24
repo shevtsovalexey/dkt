@@ -210,14 +210,14 @@ class JointModel(DisProgBuilder.DPMInterface):
       if self.params['plotTrajParams']['isSynth']:
         fig = self.plotter.plotCompWithTrueParams(self.unitModels, self.disModels,
             replaceFig=True)
-        fig.savefig('%s/compTrueParams%d%d_%s.pdf' % (self.outFolder, iterNr, picNr, self.expName))
+        # fig.savefig('%s/compTrueParams%d%d_%s.pdf' % (self.outFolder, iterNr, picNr, self.expName))
         fig.savefig('%s/compTrueParams%d%d_%s.png' % (self.outFolder, iterNr, picNr, self.expName))
         pl.clf()
         pl.cla()
         pl.close()
 
       fig = self.plotter.plotHierData(self.unitModels, self.disModels, replaceFig=True)
-      fig.savefig('%s/plotHierData%d%d_%s.pdf' % (self.outFolder, iterNr, picNr, self.expName))
+      # fig.savefig('%s/plotHierData%d%d_%s.pdf' % (self.outFolder, iterNr, picNr, self.expName))
       fig.savefig('%s/plotHierData%d%d_%s.png' % (self.outFolder, iterNr, picNr, self.expName))
 
       pl.clf()
@@ -226,8 +226,8 @@ class JointModel(DisProgBuilder.DPMInterface):
 
       for d in range(self.nrDis):
         fig = self.plotter.plotAllBiomkDisSpace(self, self.params, d)
-        fig.savefig('%s/trajDisSpace%s_%d%d_%s.pdf' % (self.outFolder, self.params['disLabels'][d],
-          iterNr, picNr, self.expName))
+        # fig.savefig('%s/trajDisSpace%s_%d%d_%s.pdf' % (self.outFolder, self.params['disLabels'][d],
+        #   iterNr, picNr, self.expName))
         fig.savefig('%s/trajDisSpace%s_%d%d_%s.png' % (self.outFolder, self.params['disLabels'][d],
                                                        iterNr, picNr, self.expName))
 

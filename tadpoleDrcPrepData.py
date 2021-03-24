@@ -178,8 +178,8 @@ def normaliseData(dataDfAll, validDf, allBiomkCols):
   trainDfCtlInd = np.in1d(dataDfAll.diag, [CTL, CTL2])
   meanTrain = np.nanmean(dataDfAll.loc[trainDfCtlInd,dtiCols], axis = 0)
   stdTrain = np.nanstd(dataDfAll.loc[trainDfCtlInd,dtiCols], axis = 0)
-  validDf[dtiCols] = (validDf[dtiCols].as_matrix() - meanValid[None,:])/(stdValid[None,:])
-  validDf[dtiCols] = validDf[dtiCols].as_matrix() * stdTrain[None, :] + meanTrain[None, :]
+  validDf[dtiCols] = (validDf[dtiCols].values - meanValid[None,:])/(stdValid[None,:])
+  validDf[dtiCols] = validDf[dtiCols].values * stdTrain[None, :] + meanTrain[None, :]
 
   print('meanValid', np.nanmean(validDf.loc[validDfCtlInd,dtiCols],axis=0), np.nanstd(validDf.loc[validDfCtlInd,dtiCols],axis=0))
   print('dataDfAll', np.nanmean(dataDfAll.loc[trainDfCtlInd,dtiCols],axis=0), np.nanstd(dataDfAll.loc[trainDfCtlInd,dtiCols],axis=0))

@@ -573,7 +573,7 @@ def printRes(modelNames, res, plotTrajParams, params):
 
   print(resDf)
   resDf.to_html('drcRes.html')
-  resDf.loc[:, 'Model' : 'DTI FA Temporal'].to_latex('drcRes.tex', index=False)
+  # resDf.loc[:, 'Model' : 'DTI FA Temporal'].to_latex('drcRes.tex', index=False)
 
 
 def getSigLabel(xs, xsMyModel, sigLevel):
